@@ -9,7 +9,7 @@ import com.golden.spacextest.model.remote.SpacexNetwork
 import kotlinx.coroutines.*
 
 class SpacexViewModel: ViewModel() {
-    private val _launches: MutableLiveData<List<LaunchRocket>>()
+    private val _launches = MutableLiveData<List<LaunchRocket>>()
     val launches: LiveData<List<LaunchRocket>>
         get() = _launches
 
