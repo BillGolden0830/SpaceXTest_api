@@ -1,12 +1,15 @@
 package com.golden.spacextest.model.remote
 
+import com.squareup.moshi.Json
+
 data class LaunchesResponse (
     val docs: List<LaunchItem>
 )
 
 data class LaunchItem(
     val links: LaunchLinks,
-    val rocket: String,
+    @Json(name = "rocket")
+    val rocketID: String,
     val success: Boolean,
     val name: String,
     val date_utc: String
@@ -33,10 +36,13 @@ data class CompanyResponse(
 
 )
 
-
-
 data class RocketResponse(
     val name: String,
     val type: String
+)
+
+data class LaunchRocket(
+    val launchItem: LaunchItem,
+    val rocketResponse: RocketResponse
 )
 
