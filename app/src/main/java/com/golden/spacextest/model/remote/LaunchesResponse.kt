@@ -8,7 +8,7 @@ data class LaunchesResponse (
 
 data class LaunchItem(
     val links: LaunchLinks,
-    @Json(name = "rocket")
+    @field:Json(name = "rocket")
     val rocketID: String,
     val success: Boolean,
     val name: String,
@@ -31,7 +31,7 @@ data class CompanyResponse(
     val founder: String,
     val founded: Int,
     val employees: Int,
-    val launch_sites: String,
+    val launch_sites: Int,
     val valuation: Long
 
 )

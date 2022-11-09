@@ -1,5 +1,7 @@
 package com.golden.spacextest.viewmodel
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -26,8 +28,7 @@ class SpacexViewModel: ViewModel() {
 
     //Coroutine context is an indexed set of threads used by the coroutines
 
-    private val exHandler = CoroutineExceptionHandler{
-        coroutineContext, throwable ->
+    private val exHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
     }
 
     private val coroutineScope = CoroutineScope(Job() + Dispatchers.Main + exHandler)
@@ -41,10 +42,13 @@ class SpacexViewModel: ViewModel() {
 
     private val currentDispatcher = Dispatchers.IO
 
-    init{
+    init {
         coroutineScope.launch {
             val companyResponse = SpacexNetwork.spacexAPI.getCompanyInfo()
-            if(companyResponse.isSuccessful)
+
+            Log.d(TAG, "COMPANY: $companyResponse")
+            
+            if (companyResponse.isSuccessful)
                 companyResponse.body()?.let {
                     _company.value = it
                 }
@@ -54,6 +58,7 @@ class SpacexViewModel: ViewModel() {
         coroutineScope.launch {
             val launches = async {
                 val allLaunches = SpacexNetwork.spacexAPI.getAllLaunches()
+                Log.d(TAG, "LAUNCHES: $allLaunches")
                 allLaunches.docs.map { launchItem ->
                     val rocketInfo = SpacexNetwork.spacexAPI.getRocketInfo(
                         launchItem.rocketID
@@ -62,6 +67,7 @@ class SpacexViewModel: ViewModel() {
                 }
             }
             launches.await().also {
+                Log.d(TAG, "Also:: $it")
                 _launches.value = it
             }
         }

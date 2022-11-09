@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">SpaceXTest</string>
+    <string name="title">SpaceX</string>
+    <string name="comp">COMPANY</string>
+    <string name="blurb">%1$s was founded by %2$s in %3$d. It now has %4$d employees, %5$d and is valued at %6$.2f</string>
+    <string name="launches">LAUNCHES</string>
+    <string name="mission">Mission: %s</string>
+    <string name="date">Date: %s</string>
+    <string name="rocket">Rocket:%s</string>
+    <string name="days">Days since:%d</string>
 </resources>
